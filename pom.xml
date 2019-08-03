@@ -28,7 +28,7 @@
         </dependency>
 
 
-        <!--11111111111111111111111111111111111111111111111111111111111111-->
+        <!--Hibernate-->
 
         <dependency>
             <groupId>mysql</groupId>
