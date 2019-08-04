@@ -1,9 +1,9 @@
-package model;
+package demo.model;
 
 import javax.persistence.*;
 
 @Entity
-public class Student {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,10 +13,10 @@ public class Student {
 	private String name;
 
 
-	public Student() {
+	public User() {
 	}
 
-	public Student(String name) {
+	public User(String name) {
 		this.name = name;
 	}
 
@@ -34,5 +34,12 @@ public class Student {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"name='" + name + '\'' +
+				'}';
 	}
 }

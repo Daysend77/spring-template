@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -22,7 +23,8 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan("controller")
+@EnableJpaRepositories("demo.dao")
+@ComponentScan(basePackages = {"demo"})
 public class MvcWebConfig implements WebMvcConfigurer {
 
 	@Autowired
@@ -61,18 +63,15 @@ public class MvcWebConfig implements WebMvcConfigurer {
 		registry.viewResolver(resolver);
 	}
 
-
-
 	/*
 	Hibernate
 	 */
-
 
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] { "model" });
+		sessionFactory.setPackagesToScan(new String[] {"demo.model"});
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
@@ -91,7 +90,7 @@ public class MvcWebConfig implements WebMvcConfigurer {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 		properties.put("hibernate.show_sql", "true");
-		properties.put("hibernate.hbm2ddl.auto", "create");
+		properties.put("hibernate.hbm2ddl.auto", "update");
 
 		return properties;
 	}

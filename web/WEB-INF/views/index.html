@@ -2,11 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-
-    <title>BORAJI.COM</title>
 </head>
 <body>
-<h1>Spring MVC + Thymeleaf  Hello World example</h1>
 <p th:text="${message}"></p>
+
+
+<form th:object="${user}" th:action="@{/save}" method="POST">
+    <input type="text" th:field="${user.name}">
+    <input type="submit" value="Send">
+</form>
+
 </body>
 </html>
